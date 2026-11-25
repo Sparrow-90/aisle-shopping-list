@@ -8,7 +8,7 @@ The original single-file version (vanilla JS) is kept in `legacy/index.html` for
 
 - **No backend, accounts or network calls:** no CDN scripts, fonts or analytics. The service worker only caches the app's own files.
 - **Source is public on GitHub:** the repo is https://github.com/Sparrow-90/aisle-shopping-list (public, branch `main`).
-- **Hosting target is Vercel.** The user plans to connect the repo at vercel.com themselves. `vercel.json` sets the Vite build and output, no-cache headers for `sw.js` and `manifest.webmanifest` (so installed PWAs pick up updates), and immutable caching for `/assets/*`. Don't deploy anywhere else (no artifacts or gists). `base: './'` keeps the build path-independent.
+- **Hosted on Vercel at https://aisle-shopping-list.vercel.app/.** It's connected to the repo, so every push to `main` deploys automatically. Pushing is publishing to users. The README points visitors to this URL rather than local setup. `vercel.json` sets the Vite build and output, no-cache headers for `sw.js` and `manifest.webmanifest` (so installed PWAs pick up updates), and immutable caching for `/assets/*`. Don't deploy anywhere else (no artifacts or gists). `base: './'` keeps the build path-independent.
 - **README screenshots** are in `docs/screenshots/` (390×844 at 2× for phone, 1100px wide for desktop), made from demo data with a Playwright script. Retake them when the look changes.
 - **Data lives only in `localStorage`** under the key `dp-aisle-sorted-shopping-list.v1`. Don't rename it: that would orphan the user's saved list. If the data shape changes, migrate inside `loadState()`.
 - **No longer opens from `file://`:** service workers need http(s), so the app must be served (dev server, preview, or hosting).

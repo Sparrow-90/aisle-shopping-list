@@ -6,6 +6,8 @@ Type what you need, and the list arranges it in the order you walk through a sho
 
 It's an installable PWA built with React and TypeScript. It works offline and keeps everything on your device: no account, no backend, no tracking.
 
+**▶ Try it: [aisle-shopping-list.vercel.app](https://aisle-shopping-list.vercel.app/)**
+
 <p align="center">
   <img src="docs/screenshots/overview.png" width="260" alt="Overview: progress card at 40% and the first aisle">
   &nbsp;
@@ -41,21 +43,24 @@ src/
 legacy/         the first version: a single dependency-free index.html
 ```
 
-## Run it locally
+## Install it on your device
 
-You need Node.js 20 or newer.
+The app is live at **https://aisle-shopping-list.vercel.app/**. Open it once, add it to your device, and from then on it opens full-screen with its own icon, even without internet.
+
+| Device | How |
+| --- | --- |
+| **iPhone / iPad** | Open the link in **Safari** → **Share** → **Add to Home Screen** |
+| **Android** | Open the link in **Chrome** → menu **⋮** → **Install app** (or **Add to Home screen**) |
+| **Desktop** | Open the link in **Chrome** or **Edge** → click the install icon at the right end of the address bar |
+
+Your list is saved only on that device, in that browser.
+
+New versions are published automatically on Vercel whenever `main` changes. An installed app picks up an update the next time it opens.
+
+## Development
 
 ```bash
 npm install
 npm run dev       # development server
 npm run build     # type-check + production build into dist/
-npm run preview   # serve the build at http://localhost:4173 (service worker on)
 ```
-
-To install it as an app, open the preview in Chrome or Edge and use the install icon in the address bar. Installing on a phone requires the `dist/` folder to be served over HTTPS. Any static host works, because the build uses relative paths.
-
-## Deploy
-
-The repo includes a `vercel.json`. Import the repository at [vercel.com/new](https://vercel.com/new) and keep the defaults. Vercel builds with `npm run build` and serves `dist/`. The config also makes sure the service worker and manifest are never cached stale, so updates reach installed apps.
-
-On iPhone, open the deployed URL in Safari and choose **Share → Add to Home Screen**. The app then opens full-screen with its own icon.
