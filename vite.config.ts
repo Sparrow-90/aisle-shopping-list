@@ -10,7 +10,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: false, // registered in src/main.tsx
-      includeAssets: ['icon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'favicon-32.png', 'icon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Shopping list',
         short_name: 'Shopping',

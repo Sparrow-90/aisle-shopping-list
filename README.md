@@ -1,3 +1,5 @@
+<img src="public/icon.svg" width="88" alt="Aisle app icon">
+
 # Aisle — a shopping list that sorts itself
 
 Type what you need, and the list arranges it in the order you walk through a shop: fruit & veg first, then bakery, dairy, meat, frozen, pantry, snacks, drinks and household. Tick things off as they go into the basket. Products you buy often come back as one-tap suggestions next time.
@@ -51,3 +53,9 @@ npm run preview   # serve the build at http://localhost:4173 (service worker on)
 ```
 
 To install it as an app, open the preview in Chrome or Edge and use the install icon in the address bar. Installing on a phone requires the `dist/` folder to be served over HTTPS. Any static host works, because the build uses relative paths.
+
+## Deploy
+
+The repo includes a `vercel.json`. Import the repository at [vercel.com/new](https://vercel.com/new) and keep the defaults. Vercel builds with `npm run build` and serves `dist/`. The config also makes sure the service worker and manifest are never cached stale, so updates reach installed apps.
+
+On iPhone, open the deployed URL in Safari and choose **Share → Add to Home Screen**. The app then opens full-screen with its own icon.

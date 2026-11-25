@@ -7,7 +7,8 @@ The original single-file version (vanilla JS) is kept in `legacy/index.html` for
 ## Constraints (from the user)
 
 - **No backend, accounts or network calls:** no CDN scripts, fonts or analytics. The service worker only caches the app's own files.
-- **Source is public on GitHub, but the app isn't hosted:** the repo is https://github.com/Sparrow-90/aisle-shopping-list (public, branch `main`). Don't deploy the app anywhere (no hosting, artifacts or gists) unless asked. The user may host `dist/` themselves later. `base: './'` in `vite.config.ts` keeps the build path-independent for that.
+- **Source is public on GitHub:** the repo is https://github.com/Sparrow-90/aisle-shopping-list (public, branch `main`).
+- **Hosting target is Vercel.** The user plans to connect the repo at vercel.com themselves. `vercel.json` sets the Vite build and output, no-cache headers for `sw.js` and `manifest.webmanifest` (so installed PWAs pick up updates), and immutable caching for `/assets/*`. Don't deploy anywhere else (no artifacts or gists). `base: './'` keeps the build path-independent.
 - **README screenshots** are in `docs/screenshots/` (390×844 at 2× for phone, 1100px wide for desktop), made from demo data with a Playwright script. Retake them when the look changes.
 - **Data lives only in `localStorage`** under the key `dp-aisle-sorted-shopping-list.v1`. Don't rename it: that would orphan the user's saved list. If the data shape changes, migrate inside `loadState()`.
 - **No longer opens from `file://`:** service workers need http(s), so the app must be served (dev server, preview, or hosting).
@@ -59,7 +60,16 @@ src/components/         Header (+ menu), Hero, ProgressCard, GroupCard (+ ItemRo
 src/styles.css          the original CSS, ported nearly verbatim
 ```
 
-The PNG icons were rendered from `public/icon.svg` with a Playwright script. If the icon changes, regenerate them the same way: screenshot the SVG at each size, with the maskable version on a full-bleed `#161616` background and the art scaled into the safe zone.
+### Icons
+
+The icon shows a black shell with three stacked pill cards in paper white, yellow and periwinkle. The top two cards have black ticked checkboxes and the bottom one is still open, echoing the app's aisle cards.
+
+- **`public/icon.svg`** is the master (512 viewBox, `rx` 112). It's used for the 192/512 manifest icons and the README.
+- **`public/favicon.svg`** is a simplified version for browser tabs: bigger cards with no text bars. At 16px the full icon turns to mush. `favicon-32.png` is its PNG fallback.
+- **`apple-touch-icon.png`** (180) is full-bleed `#161616` and unscaled. iOS rounds the corners itself and would show transparency as black.
+- **`icon-maskable-512.png`** is full-bleed, with the art scaled to 0.82 so it stays inside Android's 80% safe circle.
+
+The PNGs are rendered from the SVGs with a Playwright script: screenshot each SVG at each size. Regenerate them whenever the SVGs change, and check a preview of the iOS mask, the Android circle and the favicon at 16px.
 
 ## Data model
 
